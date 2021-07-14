@@ -5,11 +5,19 @@ let session;
 const container = document.getElementById("camera-container");
 
 function createOnBoarding() {
-  const apiURL = "youApiUrl";
-  const clientId = "yourClientId";
+  const apiURL = process.env.API_URL;
+  const clientId = process.env.CLIENT_ID;
   return window.OnBoarding.create({
     clientId: clientId,
     apiURL: apiURL,
+    theme: {
+      // main: "",
+      // mainButton: {
+      //   borderRadius: "",
+      //   color: "",
+      //   border: "",
+      // },
+    },
   });
 }
 
@@ -110,16 +118,10 @@ function renderVideoConference() {
 async function app() {
   onBoarding = createOnBoarding(); // initialize the instance
   container.innerHTML = `<p>Warming up...</p>`;
-  let t0 = performance.now();
   await onBoarding.warmup();
-  let t1 = performance.now();
-  console.log("Call to warm up model took " + (t1 - t0) + " milliseconds.");
   container.innerHTML = `<p>Creating session...</p>`;
-  t0 = performance.now();
   session = await createSession();
   await onBoarding.sendGeolocation({ token: session.token }).catch(console.log);
-  t1 = performance.now();
-  console.log("Creating session took " + (t1 - t0) + " milliseconds.");
   container.innerHTML = "";
   renderFrontTutorial();
 }

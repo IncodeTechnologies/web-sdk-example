@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "cssnano": "4.1.11",
-    "postcss": "^8.2.15"
+    "postcss": "^8.2.15",
+    "posthtml-expressions": "^1.7.1"
   }
 }
