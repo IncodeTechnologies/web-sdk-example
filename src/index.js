@@ -116,14 +116,22 @@ function renderVideoConference() {
 }
 
 async function app() {
-  onBoarding = createOnBoarding(); // initialize the instance
-  container.innerHTML = `<p>Warming up...</p>`;
-  await onBoarding.warmup();
-  container.innerHTML = `<p>Creating session...</p>`;
-  session = await createSession();
-  await onBoarding.sendGeolocation({ token: session.token }).catch(console.log);
-  container.innerHTML = "";
-  renderFrontTutorial();
+  try {
+    onBoarding = createOnBoarding(); // initialize the instance
+    container.innerHTML = `<p>Warming up...</p>`;
+    await onBoarding.warmup();
+    container.innerHTML = `<p>Creating session...</p>`;
+    session = await createSession();
+    await onBoarding
+      .sendGeolocation({ token: session.token })
+      .catch(console.log);
+    container.innerHTML = "";
+    renderFrontTutorial();
+  } catch (e) {
+    console.dir(e);
+    container.innerHTML = `<p>Something went wrong</p>`;
+    throw e;
+  }
 }
 
 document.addEventListener("DOMContentLoaded", app);
