@@ -117,6 +117,8 @@ function renderVideoConference() {
 
 async function app() {
   try {
+    document.querySelector(".loading").style.display = "none";
+    console.log("SDK loaded");
     onBoarding = createOnBoarding(); // initialize the instance
     container.innerHTML = `<p>Warming up...</p>`;
     await onBoarding.warmup();
