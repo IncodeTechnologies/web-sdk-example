@@ -26,7 +26,7 @@
   "devDependencies": {
     "cssnano": "4.1.11",
     "parcel": "^2.5.0",
-    "postcss": "^8.2.15",
+    "postcss": "^8.4.31",
     "posthtml-expressions": "^1.7.1"
   }
 }
